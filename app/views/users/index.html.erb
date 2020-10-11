@@ -1,0 +1,42 @@
+<% provide(:title, 'All Users') %>
+
+<% if params[:name].present? %>
+　<h1>検索結果</h1>
+<% else %>
+　<h1>ユーザー一覧</h1>
+<% end %>
+
+<div class="col-md-10 col-md-offset-1">
+  <%= will_paginate %>
+
+<div align="right">
+  <%= form_tag( users_path, method: "get") do %>
+    <% label_tag :name %><%= text_field_tag :name, params[:name] %>
+      <%= submit_tag "ユーザー名検索",class: "btn btn-success"  %>
+    <% end %>
+    </div>
+
+  <table class="table table-condensed table-hover" id="table-users">
+    <thead>
+
+      <tr>
+        <th><%= User.human_attribute_name :name %></th>
+        <th></th>
+      </tr>
+    </thead>
+    
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.name, user %></td>
+        <td>
+          <% if current_user.admin? && !current_user?(user) %>
+            <%= link_to "削除", user, method: :delete,
+                data: { confirm: "削除してよろしいですか？" },
+                class: "btn btn-danger" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate %>
+</div>

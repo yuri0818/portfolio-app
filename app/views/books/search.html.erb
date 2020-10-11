@@ -1,0 +1,30 @@
+
+     <%= form_tag books_search_path, method: :get do  %>
+        <%= label_tag :keyword, 'キーワード検索' %>
+        <%= text_field_tag 'keyword', params[:keyword] %>
+        <%= submit_tag "検索" %>
+<% end %>
+    <table>
+     <thead>
+      <tr>
+       <th>商品名</th>
+       <th>価格</th>
+       
+      </tr>
+     </thead>
+      <tbody>
+      
+       <% if @books.present? %>
+        <% @books.each do |book| %>
+       
+        <tr>
+            <td><%= link_to book.title, "#{book.title}" %></td>
+            
+          
+        </tr>
+      
+       <% end %>
+      </tbody>
+     </table>
+      <% end %>
+      

@@ -96,3 +96,17 @@ p {
     color: $state-danger-text;
   }
 }
+
+.type-mask h2{
+  animation: scrollmask 10s ease 1.5s infinite;
+  background-clip: text;
+  background-image: url(img/sample.jpg);
+  color: transparent;
+  font-size: 80px;
+}
+@-webkit-keyframes scrollmask {
+  0% {background-position: 0 0;}
+  100% {background-position: 100% 0;}
+}
+ 
+
